@@ -230,12 +230,12 @@ on:
       builder_name:
         description: "Set Armbian builder signature."
         required: false
-        default: "yyang"
+        default: "yYang365"
         type: choice
         options:
           - ophub
           - angel
-          - yyang
+          - yYang365
 
 env:
   TZ: America/New_York
