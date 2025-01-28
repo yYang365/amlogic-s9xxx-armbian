@@ -327,7 +327,7 @@ jobs:
           echo "status=success" >> ${GITHUB_OUTPUT}
 
       - name: Upload Armbian image to Release
-        uses: yYang365/amlogic-s9xxx-armbian@main
+        uses: ncipollo/release-action@main
         if: ${{ steps.clean.outputs.status }} == 'success' && !cancelled()
         with:
           tag: ${{ steps.clean.outputs.build_tag }}
@@ -350,7 +350,7 @@ jobs:
           builder_name: ${{ inputs.builder_name }}
 
       - name: Upload Rebuild image to Release
-        uses: yYang365/amlogic-s9xxx-armbian@main
+        uses: ncipollo/release-action@main
         if: ${{ env.PACKAGED_STATUS }} == 'success' && !cancelled()
         with:
           tag: ${{ steps.clean.outputs.build_tag }}
