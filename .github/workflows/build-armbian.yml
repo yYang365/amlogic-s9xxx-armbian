@@ -22,7 +22,7 @@ on:
       armbian_board:
         description: "Select device board."
         required: false
-        default: "all"
+        default: "tw07"
         type: choice
         options:
           - all
@@ -169,6 +169,7 @@ on:
           - tpm312
           - tqc-a01
           - tvi3315a
+          - tw07
           - vplus
           - xiaobao
           - yskj
@@ -229,12 +230,12 @@ on:
       builder_name:
         description: "Set Armbian builder signature."
         required: false
-        default: "ophub"
+        default: "yyang"
         type: choice
         options:
           - ophub
           - angel
-          - yourname
+          - yyang
 
 env:
   TZ: America/New_York
@@ -297,7 +298,7 @@ jobs:
           df -hT ${PWD}
           git clone -q --single-branch --depth=1 --branch=main https://github.com/armbian/build.git build
           ln -sf /builder/build ${GITHUB_WORKSPACE}/build
-          ln -sf /builder/build /home/runner/work/_actions/ophub/amlogic-s9xxx-armbian/main/build
+          ln -sf /builder/build /home/runner/work/_actions/yYang365/amlogic-s9xxx-armbian/main/build
           echo "status=success" >> ${GITHUB_OUTPUT}
 
       - name: Compile Armbian [ ${{ inputs.set_release }} ]
@@ -326,7 +327,7 @@ jobs:
           echo "status=success" >> ${GITHUB_OUTPUT}
 
       - name: Upload Armbian image to Release
-        uses: ncipollo/release-action@main
+        uses: yYang365/amlogic-s9xxx-armbian@main
         if: ${{ steps.clean.outputs.status }} == 'success' && !cancelled()
         with:
           tag: ${{ steps.clean.outputs.build_tag }}
@@ -335,7 +336,7 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Rebuild Armbian
-        uses: ophub/amlogic-s9xxx-armbian@main
+        uses: yYang365/amlogic-s9xxx-armbian@main
         if: ${{ steps.clean.outputs.status }} == 'success' && !cancelled()
         with:
           build_target: armbian
@@ -349,7 +350,7 @@ jobs:
           builder_name: ${{ inputs.builder_name }}
 
       - name: Upload Rebuild image to Release
-        uses: ncipollo/release-action@main
+        uses: yYang365/amlogic-s9xxx-armbian@main
         if: ${{ env.PACKAGED_STATUS }} == 'success' && !cancelled()
         with:
           tag: ${{ steps.clean.outputs.build_tag }}
