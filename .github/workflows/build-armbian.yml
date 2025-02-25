@@ -22,7 +22,7 @@ on:
       armbian_board:
         description: "Select device board."
         required: false
-        default: "all"
+        default: "tw07"
         type: choice
         options:
           - all
@@ -161,6 +161,7 @@ on:
           - station-m1
           - swan1-w28
           - sw799
+          - tw07
           - tanix-tx6
           - tb-ls3399
           - tn3399
