@@ -22,7 +22,7 @@ on:
       armbian_board:
         description: "Select device board."
         required: false
-        default: "all"
+        default: "sw799"
         type: choice
         options:
           - all
@@ -232,12 +232,12 @@ on:
       builder_name:
         description: "Set Armbian builder signature."
         required: false
-        default: "ophub"
+        default: "yYang"
         type: choice
         options:
           - ophub
           - angel
-          - yourname
+          - yYang
 
 env:
   TZ: America/New_York
